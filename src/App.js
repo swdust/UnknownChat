@@ -47,11 +47,17 @@ function SignIn() {
     auth.signInWithPopup(provider)
   }
 
+  const signInUkn = () => {
+    auth.signInAnonymously()
+  }
   return (
     <>
       <button className='sign-in' onClick={signInWithGoogle}>
-        Entre se quiser com Google :D <br />
-        Se não quiser não entre :D
+        Entre com o Google ou.. <br />
+      </button>
+      <br />
+      <button className='sign-in' onClick={signInUkn}>
+        Entre anonimamente
       </button>
       <p></p>
     </>
@@ -62,7 +68,7 @@ function SignOut() {
   return (
     auth.currentUser && (
       <button className='sign-out' onClick={() => auth.signOut()}>
-        Se saia
+        Se sair
       </button>
     )
   )
@@ -106,7 +112,7 @@ function ChatRoom() {
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          placeholder='fale se quiser'
+          placeholder='Fale o que quiser'
         />
 
         <button type='submit' disabled={!formValue}>
@@ -125,7 +131,11 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <img src={photoURL} />
+        <img
+          src={
+            photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+          }
+        />
         <p>{text}</p>
       </div>
     </>
